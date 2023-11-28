@@ -1,5 +1,5 @@
 import Comments from "@/components/Comments";
-import { getPosts, getPostBySlug } from "@/lib/posts";
+import { getPosts, getPostBySlug } from "@/lib/post";
 import { notFound } from "next/navigation";
 
 type BlogPostParams = {
