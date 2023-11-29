@@ -1,11 +1,15 @@
-import { getPostBySlug, getPosts } from "@/lib/post";
 import Link from "next/link";
+import { getPosts } from "@/lib/post";
 
 export default function Page() {
   const posts = getPosts();
+  console.log(posts);
+
   return (
-    <div>
-      <h2></h2>
+    <main className="flex min-h-screen flex-col items-center justify-between p-24">
+      <h1>This is the blogs page! </h1>
+      <p>My blog posts</p>
+      <Link href="./"> Go Back</Link>
       <ul>
         {posts.map((post) => {
           return (
@@ -15,6 +19,6 @@ export default function Page() {
           );
         })}
       </ul>
-    </div>
+    </main>
   );
 }

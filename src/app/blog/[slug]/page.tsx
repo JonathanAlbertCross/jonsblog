@@ -1,27 +1,23 @@
 import Comments from "@/components/Comments";
-import { getPosts, getPostBySlug } from "@/lib/post";
+import { getPostBySlug, getPosts } from "@/lib/post";
 import { notFound } from "next/navigation";
 
-type BlogPostParams = {
+type blogPostParams = {
   params: {
     slug: string;
   };
 };
 
-// this builds all the params for ALL blog posts when the website is deployed
 export function generateStaticParams() {
   const posts = getPosts();
   return posts.map((post) => {
-    return {
-      slug: post.slug,
-    };
+    return { slug: post.slug };
   });
 }
 
-export default function BlogPost({ params }: BlogPostParams) {
+export default function Page({ params }: blogPostParams) {
   const post = getPostBySlug(params.slug);
 
-  console.log(post, "this is from the blog page");
   if (!post) {
     notFound();
   }
@@ -33,8 +29,7 @@ export default function BlogPost({ params }: BlogPostParams) {
         dangerouslySetInnerHTML={{ __html: post.body.html }}
         className="prose dark:prose-invert"
       ></div>
-      {/* @ts-ignore */}
-      <Comments postSlug={params.slug} />
+      <Comments postSlug={params.slug}></Comments>
     </div>
   );
 }
